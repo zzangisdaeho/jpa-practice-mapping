@@ -1,6 +1,7 @@
 package hellojpa;
 
 import entity.Member;
+import entity.Team;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,34 +17,37 @@ public class JpaMain {
 
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        //code
 
         try {
-//            쿼리는 JPQL
-//            List<Member> resultList = em.createQuery("select m from Member as m", Member.class).getResultList();
-//            Member m = em.find(Member.class, 2L);
+            Team team1 = new Team();
+            team1.setName("team1");
 
-            //비영속
-            Member member = new Member();
-            member.setId(2L);
-            member.setName("HelloB");
+            Member member1 = new Member();
+            member1.setUsername("member1");
+            member1.setTeam(team1);
 
-            //영속
-            em.persist(member);
+            System.out.println("======================");
+            em.persist(team1);
+            em.persist(member1);
 
-            //수동 flush -> 쓰기 지연 Sql저장소의 쿼리가 날라감
-            //쓰기 지연 저장소만 비워질 뿐 , 1차 캐시는 남아있음
-//            em.flush();
+            em.flush();
+            em.clear();
 
-//            영속성 지우기
-//            특정
-//            em.detach(member);
-//            전채
-//            em.clear();
+            System.out.println("======================");
 
-            //커밋시에 자동으로 flush 실행되어 sql 발생
+            Member readMember = em.find(Member.class, member1.getId());
+            Team readTeam = readMember.getTeam();
+            System.out.println(readTeam.getName());
+
+//            Team readTeam = em.find(Team.class, team1.getId());
+//
+//            Member readMember = readTeam.getMember().get(0);
+//
+//            System.out.println(readMember.getUsername());
+
             tx.commit();
         }catch (Exception e){
+            System.out.println("Exception 발생");
             tx.rollback();
         }finally {
             em.close();

@@ -1,4 +1,4 @@
-package entity;
+package entity.manytoone;
 
 import javax.persistence.*;
 import java.util.ArrayList;

@@ -3,7 +3,7 @@ package entity.manytoone;
 import javax.persistence.*;
 
 @Entity
-public class Member {
+public class MemberMTO {
 
     @Id @GeneratedValue
     @Column(name = "MEMBER_ID")
@@ -14,7 +14,7 @@ public class Member {
 
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
-    private Team team;
+    private TeamMTO teamMTO;
 
     public Long getId() {
         return id;
@@ -32,17 +32,17 @@ public class Member {
         this.username = username;
     }
 
-    public Team getTeam() {
-        return team;
+    public TeamMTO getTeam() {
+        return teamMTO;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setTeam(TeamMTO teamMTO) {
+        this.teamMTO = teamMTO;
     }
 
     //        연관관계 편의 메서드
-    public void changeTeam(Team team) {
-        this.team = team;
-       team.getMembers().add(this);
+    public void changeTeam(TeamMTO teamMTO) {
+        this.teamMTO = teamMTO;
+       teamMTO.getMembers().add(this);
     }
 }

@@ -16,25 +16,25 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Team team1 = new Team();
-            team1.setName("team1");
+            TeamMTO teamMTO1 = new TeamMTO();
+            teamMTO1.setName("team1");
 
-            Member member1 = new Member();
-            member1.setUsername("member1");
-            member1.setTeam(team1);
+            MemberMTO memberMTO1 = new MemberMTO();
+            memberMTO1.setUsername("member1");
+            memberMTO1.setTeam(teamMTO1);
 
             System.out.println("======================");
-            em.persist(team1);
-            em.persist(member1);
+            em.persist(teamMTO1);
+            em.persist(memberMTO1);
 
             em.flush();
             em.clear();
 
             System.out.println("======================");
 
-            Member readMember = em.find(Member.class, member1.getId());
-            Team readTeam = readMember.getTeam();
-            System.out.println(readTeam.getName());
+            MemberMTO readMemberMTO = em.find(MemberMTO.class, memberMTO1.getId());
+            TeamMTO readTeamMTO = readMemberMTO.getTeam();
+            System.out.println(readTeamMTO.getName());
 
 //            Team readTeam = em.find(Team.class, team1.getId());
 //

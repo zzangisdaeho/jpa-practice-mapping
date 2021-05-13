@@ -1,13 +1,11 @@
-package entity.one;
-
-import entity.onetomany.Member;
+package entity.onetomany;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Team {
+public class TeamOTM {
 
     @Id @GeneratedValue
     @Column(name = "TEAM_ID")
@@ -17,6 +15,6 @@ public class Team {
 
     @OneToMany
     @JoinColumn(name = "TEAM_ID")
-    private List<Member> members = new ArrayList<>();
+    private List<MemberOTM> memberOTMS = new ArrayList<>();
 
 }

@@ -1,6 +1,7 @@
 package entity.manytoone;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class MemberMTO {
@@ -45,4 +46,5 @@ public class MemberMTO {
         this.teamMTO = teamMTO;
        teamMTO.getMembers().add(this);
     }
+
 }
